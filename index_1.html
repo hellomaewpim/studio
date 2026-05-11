@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แมวพิมพ์ | รับออกแบบสื่อครบวงจร</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --color-primary: #f3f36b;
+            --color-secondary: #84cac5;
+            --color-accent: #00726f;
+            --color-accent-dark: #005855;
+            --color-accent-light: #e0f2f1;
+            --color-text: #333333;
+            --color-white: #ffffff;
+            --color-gray: #f4f4f4;
+            --color-line: #00B900;
+            --shadow-sm: 0 4px 15px rgba(0,114,111,0.08);
+            --shadow-md: 0 10px 30px rgba(0,114,111,0.12);
+            --shadow-lg: 0 20px 50px rgba(0,114,111,0.15);
+            --radius: 20px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'IBM Plex Sans Thai', sans-serif;
+            color: var(--color-text);
+            background-color: var(--color-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 { color: var(--color-accent); }
+        h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.2; margin-bottom: 1.2rem; }
+        h2 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); text-align: center; margin-bottom: 1rem; letter-spacing: 0.1rem; }
+        h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .section-desc { text-align: center; margin-bottom: 3.5rem; color: #666; font-size: 1.05rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+       .social-link {
+    color: white !important;
+    font-size: 24px;
+    margin-left: 15px;
+}
+
+/* ===== GLOBAL CONTAINER (ตัวกั้นขอบหลัก) ===== */
+        .container {
+            max-width: 1200px; /* บังคับความกว้างสูงสุด */
+            margin: 0 auto !important; /* จัดให้อยู่กลางจอเสมอ */
+            padding: 0 5%;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* ===== HEADER RE-STRUCTURE ===== */
+        header {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            height: 80px;
+            background:#00726f;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 114, 111, 0.05);
+            display: flex;
+            align-items: center;
+        }
+
+        .header-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo-icon img {
+            width: 150px; /* ขนาดโลโก้ตามต้องการ */
+            height: auto;
+            display: block;
+        }
+
+        /* ===== HERO RE-STRUCTURE ===== */
+        .hero {
+            padding: 300px 0 100px;
+            width: 100%;
+            display: block; /* เปลี่ยนจาก flex เป็น block เพื่อให้ container ทำงาน */
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.6fr 0.4fr;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .hero-mascot {
+            background: none !important;
+            box-shadow: none !important;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .hero-mascot img {
+        width: 350px;
+        height: auto;
+        filter: drop-shadow(0 10px 15px rgba(0,0,0,0.05));
+        }
+
+        /* มือถือ */
+        @media (max-width: 968px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero-mascot { justify-content: center; margin-top: 30px; }
+            .hero-mascot img { width: 350px; }
+        }
+        
+        nav { display: flex; align-items: center; gap: 0.5rem; }
+        nav a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            transition: 0.25s;
+        }
+        nav a:hover { background: rgba(255,255,255,0.15); color: #fff; }
+        nav .btn-contact {
+            background: var(--color-white);
+            color: var(--color-accent);
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        nav .btn-contact:hover { background: var(--color-primary); transform: translateY(-2px); }
+
+        /* Hamburger */
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; }
+        .hamburger span { display: block; width: 26px; height: 2px; background: white; border-radius: 2px; transition: 0.3s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .mobile-menu {
+            display: none; position: fixed; top: 75px; left: 0; right: 0;
+            background: var(--color-accent-dark); padding: 1.5rem;
+            flex-direction: column; gap: 0.5rem; z-index: 999;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .mobile-menu.show { display: flex; }
+        .mobile-menu a { color: white; text-decoration: none; padding: 12px 20px; border-radius: 12px; font-size: 1rem; transition: 0.2s; }
+        .mobile-menu a:hover { background: rgba(255,255,255,0.15); }
+
+        /* ===== HERO ===== */
+        /* แก้ไขส่วน Hero ใหม่ */
+        .hero {
+            padding: 160px 0 100px;
+            overflow: hidden;
+            width: 100%;
+        }
+   /* 1. ระบบกั้นขอบ (สำคัญที่สุด) */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto !important; /* บังคับให้อยู่กลางจอ */
+            padding: 0 40px; /* กันชนขอบจอซ้าย-ขวา */
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* 2. ปรับแต่ง Header */
+        header {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            height: 80px;
+            background: #00726f;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo-icon img {
+            width: 140px; /* ขนาดโลโก้ที่เหมาะสม */
+            height: auto;
+        }
+
+        /* 3. ปรับแต่ง Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            background-color: var(--color-white);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 0.6fr; /* แบ่งสัดส่วนข้อความกับรูป */
+            align-items: center;
+            gap: 60px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.2;
+            color: var(--color-accent);
+            margin-bottom: 20px;
+        }
+
+        .hero-mascot {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-mascot img {
+            width: 350px; /* ขนาดมาสคอตที่เหมาะสม */
+            height: auto;
+            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.1));
+        }
+
+        /* สำหรับหน้าจอมือถือ */
+        @media (max-width: 968px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-mascot { margin-top: 40px; }
+            .container { padding: 0 20px; }
+            }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--color-accent);
+            color: var(--color-white);
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: 'Prompt', sans-serif;
+            transition: all 0.3s ease;
+        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,114,111,0.3); }
+        .btn-outline {
+            background: transparent;
+            color: var(--color-accent);
+            border: 2px solid var(--color-accent);
+        }
+        .btn-outline:hover { background: var(--color-accent); color: white; }
+
+        .hero-stats {
+            display: flex;
+            gap: 2.5rem;
+            margin-top: 3rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid rgba(0,114,111,0.15);
+        }
+        .stat-item { text-align: center; }
+        .stat-num { font-size: 2rem; font-weight: 700; color: var(--color-accent); line-height: 1; }
+        .stat-label { font-size: 0.85rem; color: #777; margin-top: 4px; }
+
+        /* 1. คุมขนาดฝั่งขวาไม่ให้ใหญ่เกินหน้าจอ */
+.hero-image {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 150px; /* เพิ่มพื้นที่แนวตั้งกันล้น */
+}
+
+        /* ===== SERVICES ===== */
+        #services { background-color: var(--color-secondary); padding: 7rem 5%; }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: var(--color-white);
+            padding: 2.5rem 2rem;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.35s ease;
+            border: 1px solid transparent;
+            cursor: default;
+        }
+        .service-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(0,114,111,0.1);
+        }
+        .service-icon {
+            width: 80px; height: 80px;
+            background: linear-gradient(135deg, var(--color-secondary), var(--color-accent-light));
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2.2rem;
+            transition: 0.3s;
+        }
+        .service-card:hover .service-icon { transform: scale(1.1) rotate(8deg); }
+        .service-card p { color: #666; font-size: 0.95rem; line-height: 1.7; }
+
+        /* ===== PROCESS ===== */
+        #process { background: var(--color-primary); padding: 7rem 5%; }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px; left: 10%; right: 10%;
+            height: 2px;
+            background: linear-gradient(to right, var(--color-accent-light), var(--color-accent), var(--color-accent-light));
+            z-index: 0;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            animation: fadeUp 0.6s ease both;
+        }
+        .step-num {
+            width: 80px; height: 80px;
+            background: var(--color-accent);
+            color: white;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem; font-weight: 700;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 6px 20px rgba(0,114,111,0.3);
+            border: 4px solid var(--color-primary);
+            transition: 0.3s;
+        }
+        .process-step:hover .step-num { transform: scale(1.1); box-shadow: 0 10px 30px rgba(0,114,111,0.4); }
+        .process-step h3 { color: var(--color-accent); margin-bottom: 0.5rem; }
+        .process-step p { color: #666; font-size: 0.9rem; }
+
+        /* ===== PORTFOLIO ===== */
+        #portfolio { background-color: var(--color-white); padding: 7rem 5%; }
+
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+        .filter-btn {
+            background: var(--color-gray);
+            border: 2px solid transparent;
+            color: #555;
+            padding: 10px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-family: 'Prompt', sans-serif;
+            font-size: 0.95rem;
+            transition: 0.3s;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--color-accent);
+            color: var(--color-white);
+            border-color: var(--color-accent);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .portfolio-item {
+            background: var(--color-gray);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        .portfolio-item:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+        .portfolio-item.hide { display: none; }
+
+        .portfolio-thumb {
+            height: 230px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 5rem;
+            position: relative;
+            overflow: hidden;
+            background: #f0f0f0;
+        }
+        .portfolio-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        .portfolio-item:hover .portfolio-thumb img {
+            transform: scale(1.05);
+        }
+        .portfolio-thumb-overlay {
+            position: absolute; inset: 0;
+            background: var(--color-accent);
+            opacity: 0;
+            display: flex; align-items: center; justify-content: center;
+            transition: 0.3s;
+        }
+        .portfolio-thumb-overlay span { color: white; font-size: 0.95rem; font-weight: 600; }
+        .portfolio-item:hover .portfolio-thumb-overlay { opacity: 0.9; }
+
+        .portfolio-info { padding: 1.5rem; background: white; }
+        .portfolio-info h3 { font-size: 1.05rem; margin-bottom: 0.3rem; }
+        .portfolio-info p { color: #888; font-size: 0.88rem; }
+        .portfolio-tag {
+            display: inline-block;
+            background: var(--color-accent-light);
+            color: var(--color-accent);
+            font-size: 0.78rem;
+            padding: 3px 12px;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+        .portfolio-section { padding: 100px 0; background: var(--color-white); }
+.portfolio-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    gap: 30px; 
+    margin-top: 40px; 
+}
+.portfolio-item { 
+    background: var(--color-white); 
+    border-radius: var(--radius); 
+    overflow: hidden; 
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s ease;
+}
+.portfolio-item:hover { transform: translateY(-10px); }
+.portfolio-item img { width: 100%; height: 250px; object-fit: cover; display: block; }
+.portfolio-info { padding: 20px; text-align: center; font-weight: 600; }
+
+.filter-container { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
+.filter-btn {
+    padding: 10px 25px;
+    border-radius: 30px;
+    border: 2px solid var(--color-accent);
+    background: transparent;
+    color: var(--color-accent);
+    cursor: pointer;
+    font-family: 'Prompt', sans-serif;
+    transition: all 0.3s;
+}
+.filter-btn.active, .filter-btn:hover {
+    background: var(--color-accent);
+    color: white;
+}
+
+        /* ===== CLIENTS ===== */
+        #clients { background-color: var(--color-secondary); padding: 6rem 5%; }
+
+        .client-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .client-logo-item {
+            width: 120px; height: 70px;
+            background: white;
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.85rem; font-weight: 600; color: #fafafa;;
+            box-shadow: var(--shadow-sm);
+            transition: 0.3s;
+            text-align: center; padding: 10px;
+        }
+        .client-logo-item:hover { transform: scale(1.08); box-shadow: var(--shadow-md); color: var(--color-accent); }
+
+        /* ===== TESTIMONIALS ===== */
+        #testimonials { background: var(--color-primary); padding: 7rem 5%; }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2.5rem 2rem;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            transition: 0.3s;
+        }
+        .testimonial-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+        .testimonial-card::before {
+            content: '"';
+            position: absolute; top: 1.2rem; left: 1.8rem;
+            font-size: 5rem; line-height: 1;
+            color: var(--color-accent-light);
+            font-family: Georgia, serif;
+        }
+        .testimonial-text { margin-top: 2rem; color: #555; font-size: 0.97rem; line-height: 1.8; }
+        .testimonial-author { display: flex; align-items: center; gap: 12px; margin-top: 1.5rem; }
+        .author-avatar {
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            background: var(--color-accent);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+        .author-name { font-weight: 700; color: var(--color-accent); font-size: 0.95rem; }
+        .author-company { font-size: 0.82rem; color: #fafafa; }
+        .star-rating { color: #f5a623; font-size: 1rem; margin-top: 0.3rem; }
+
+        /* ===== CONTACT ===== */
+        #contact { background-color: var(--color-secondary); padding: 7rem 5%; }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .contact-info h2 { text-align: left; font-size: 1.8rem; }
+        .contact-info > p { color: #666; margin-bottom: 2.5rem; font-size: 1rem; }
+
+        .contact-detail-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(0,114,111,0.1);
+        }
+        .contact-detail-item:last-of-type { border-bottom: none; }
+        .detail-icon {
+            width: 44px; height: 44px;
+            background: var(--color-accent);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .detail-text { font-size: 0.9rem; color: #666; }
+        .detail-text a { color: var(--color-accent); text-decoration: none; font-weight: 600; }
+        .detail-text a:hover { text-decoration: underline; }
+        .detail-label { font-size: 0.78rem; color: #fafafa; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.05rem; }
+
+        .line-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--color-line);
+            color: var(--color-white);
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0,185,0,0.3);
+            margin-top: 2rem;
+            font-family: 'Prompt', sans-serif;
+            font-size: 1rem;
+        }
+        .line-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,185,0,0.4); }
+
+        .contact-form {
+            background: var(--color-white);
+            padding: 3rem;
+            border-radius: 28px;
+            box-shadow: var(--shadow-md);
+        }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.6rem; font-weight: 600; color: var(--color-accent); font-size: 0.9rem; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 13px 18px;
+            border: 2px solid #e8f0ef;
+            border-radius: 14px;
+            font-size: 0.97rem;
+            font-family: 'Prompt', sans-serif;
+            outline: none;
+            transition: 0.3s;
+            color: var(--color-text);
+            background: #fafafa;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--color-accent);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(0,114,111,0.08);
+        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+        .btn-submit {
+            width: 100%;
+            justify-content: center;
+            padding: 16px;
+            font-size: 1.05rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--color-accent-dark);
+            color: rgba(255,255,255,0.85);
+            padding: 4rem 5% 2.5rem;
+        }
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        .footer-brand h3 { color: white; font-size: 1.4rem; margin-bottom: 0.8rem; }
+        .footer-brand p { font-size: 0.9rem; line-height: 1.8; opacity: 0.75; max-width: 280px; }
+        .footer-col h4 { color: white; font-size: 1rem; margin-bottom: 1rem; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 0.6rem; }
+        .footer-col ul li a { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
+        .footer-col ul li a:hover { color: white; }
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 1rem;
+        }
+        .footer-bottom p { font-size: 0.85rem; opacity: 0.6; }
+        .social-links { display: flex; gap: 12px; }
+        .social-link {
+            width: 38px; height: 38px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .social-link:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
+
+        /* ===== SCROLL TO TOP ===== */
+        #scrollTop {
+            position: fixed;
+            bottom: 2rem; right: 2rem;
+            width: 48px; height: 48px;
+            background: var(--color-accent);
+            color: white; border: none; border-radius: 14px;
+            cursor: pointer; font-size: 1.2rem;
+            box-shadow: var(--shadow-md);
+            opacity: 0; transform: translateY(20px);
+            transition: 0.3s; z-index: 900;
+        }
+        #scrollTop.show { opacity: 1; transform: translateY(0); }
+        #scrollTop:hover { background: var(--color-accent-dark); transform: translateY(-3px); }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* ===== MODAL ===== */
+        .modal-overlay {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 2000;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: 0.3s;
+            backdrop-filter: blur(6px);
+        }
+        .modal-overlay.show { opacity: 1; pointer-events: all; }
+        .modal-box {
+            background: white;
+            border-radius: 28px;
+            padding: 3rem;
+            max-width: 480px; width: 90%;
+            text-align: center;
+            transform: scale(0.9); transition: 0.3s;
+        }
+        .modal-overlay.show .modal-box { transform: scale(1); }
+        .modal-box .modal-icon { font-size: 4rem; margin-bottom: 1rem; }
+        .modal-box h3 { color: var(--color-accent); font-size: 1.5rem; margin-bottom: 0.8rem; }
+        .modal-box p { color: #666; margin-bottom: 2rem; }
+        .modal-close {
+            background: var(--color-accent);
+            color: white; border: none;
+            padding: 12px 32px; border-radius: 50px;
+            font-size: 1rem; font-family: 'Prompt', sans-serif;
+            font-weight: 600; cursor: pointer; transition: 0.3s;
+        }
+        .modal-close:hover { background: var(--color-accent-dark); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 968px) {
+            #hero-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
+                padding-top: 4rem;
+                min-height: auto;
+            }
+            .hero-text p { margin-left: auto; margin-right: auto; }
+            .hero-buttons { justify-content: center; }
+            .hero-stats { justify-content: center; }
+            .hero-image-wrap { order: -1; }
+            .hero-mascot { width: 240px; height: 240px; font-size: 6rem; }
+
+            nav { display: none; }
+            .hamburger { display: flex; }
+
+            .contact-container { grid-template-columns: 1fr; }
+            .contact-info h2 { text-align: center; }
+
+            .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+
+            .process-steps::before { display: none; }
+
+            .form-row { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 968px) {
+            .hero-mascot { 
+                width: 200px; /* ปรับขนาดสำหรับมือถือ */
+                height: 200px; 
+        
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+    <div class="container">
+        <div class="header-wrapper">
+            <a href="#" class="logo">
+                <div class="logo-icon"><img src="logoweb.png" alt="Logo"></div>
+            </a>
+            <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <nav>
+                <a href="#services">บริการของเรา</a>
+                <a href="#portfolio">ผลงาน</a>
+                <a href="#contact" class="btn-contact">ติดต่อโปรเจกต์</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#services" onclick="closeMenu()">บริการของเรา</a>
+    <a href="#portfolio" onclick="closeMenu()">ผลงาน</a>
+    <a href="#process" onclick="closeMenu()">ขั้นตอน</a>
+    <a href="#clients" onclick="closeMenu()">ลูกค้าของเรา</a>
+    <a href="#testimonials" onclick="closeMenu()">รีวิว</a>
+    <a href="#contact" onclick="closeMenu()">ติดต่อโปรเจกต์</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero-section">
+    <div class="container" style="display: grid; grid-template-columns: 2fr 1fr; align-items: center; gap: 60px;">
+        <div class="hero-content fade-up">
+            <h1>สร้างสรรค์งานดีไซน์<br>ที่ช่วยให้ผลงานของคุณ "โดดเด่น"</h1>
+            <p>รับออกแบบสื่อสิ่งพิมพ์ Brochure และ Online Content ครบวงจร โดย Graphic Designer ที่ใส่ใจคุณ</p>
+            <div class="hero-btns">
+                <a href="#portfolio" class="btn">ดูผลงานของเรา</a>
+                <a href="#services" class="btn btn-outline">บริการทั้งหมด</a>
+            </div>
+        </div>
+        <div class="hero-image fade-up">
+            <div class="hero-mascot">
+                <img src="Mascot.png" alt="MaewPim Mascot">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section id="services">
+    <h2 class="fade-up">บริการของเรา</h2>
+    <p class="section-desc fade-up">แมวพิมพ์ ให้บริการออกแบบครบวงจร ตั้งแต่งานออนไลน์ไปจนถึงงานผลิตกราฟิกนิทรรศการ เพื่อตอบโจทย์ทุกความต้องการของคุณ</p>
+    <div class="services-grid">
+        <div class="service-card fade-up">
+            <div class="service-icon">📄</div>
+            <h3>รายงานประจำปี/ผลงานวิชาการ</h3>
+            <p>ออกแบบ Annual Report Academic Writing สไตล์โมเดิร์น น่าเชื่อถือ อ่านง่าย สื่อสารข้อมูลองค์กรได้อย่างมืออาชีพ</p>
+        </div>
+        <div class="service-card fade-up">
+            <div class="service-icon">🖨️</div>
+            <h3>สื่อสิ่งพิมพ์</h3>
+            <p>ตั้งแต่นามบัตร แผ่นพับ เมนู แพ็คเก็จจิ้ง ไปจนถึงโปสเตอร์ เราออกแบบให้สวยงามและพร้อมสำหรับงานพิมพ์</p>
+        </div>
+        <div class="service-card fade-up">
+            <div class="service-icon">💻</div>
+            <h3>สื่อออนไลน์</h3>
+            <p>ออกแบบแบนเนอร์ กราฟิกโซเชียลมีเดีย Infographic ที่ดึงดูดสายตาและสร้าง Engagement ให้แบรนด์ของคุณ</p>
+        </div>
+        <div class="service-card fade-up">
+            <div class="service-icon">🎪</div>
+            <h3>สื่อนิทรรศการ</h3>
+            <p>ออกแบบบูธ กราฟิกนิทรรศการ ป้าย Roll-up และสื่อสำหรับงานอีเวนต์ เพื่อให้เนื้อหาของคุณโดดเด่นที่สุด</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PROCESS ===== -->
+<section id="process">
+    <h2 class="fade-up">ขั้นตอนการทำงาน</h2>
+    <p class="section-desc fade-up">เราทำงานอย่างเป็นระบบและโปร่งใส เพื่อให้คุณได้ผลลัพธ์ที่ดีที่สุด</p>
+    <div class="process-steps">
+        <div class="process-step fade-up">
+            <div class="step-num">1</div>
+            <h3>รับ Brief</h3>
+            <p>พูดคุยทำความเข้าใจโปรเจกต์ กลุ่มเป้าหมาย และวัตถุประสงค์ของแบรนด์คุณ</p>
+        </div>
+        <div class="process-step fade-up">
+            <div class="step-num">2</div>
+            <h3>วางแนวคิด</h3>
+            <p>ทีมครีเอทีฟ วางโครงสร้างและแนวทางการออกแบบที่เหมาะสมกับแบรนด์</p>
+        </div>
+        <div class="process-step fade-up">
+            <div class="step-num">3</div>
+            <h3>นำเสนอ Draft</h3>
+            <p>นำเสนองาน Draft พร้อมรับฟีดแบ็คและปรับแก้จนกว่าจะถูกใจ</p>
+        </div>
+        <div class="process-step fade-up">
+            <div class="step-num">4</div>
+            <h3>ส่งมอบงาน</h3>
+            <p>ส่งไฟล์งานพร้อมใช้งาน ทั้ง Print และ Digital</p>
+        </div>
+    </div>
+</section>
+<section id="pricing" class="fade-up" style="padding: 100px 20px; background: var(--color-white);">
+    <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+        <h2 style="font-size: 2.5rem; color: var(--color-accent); margin-bottom: 50px; letter-spacing: 0.2rem;">
+            PRICING <span style="font-weight: 300; color: var(--color-text);">| เรทราคา</span>
+        </h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+            <div style="background: var(--color-gray); padding: 40px 30px; border-radius: var(--radius); transition: 0.3s;">
+                <h3 style="color: var(--color-accent); margin-bottom: 15px;">Annual Report</h3>
+                <p style="font-size: 1.5rem; font-weight: 700; margin-bottom: 10px;">800.- / ยก (8หน้า) <span style="font-size: 0.9rem; font-weight: 400;"> </span></p>
+                <p style="color: #666; font-size: 0.9rem;">ดีไซน์ Infographic สวยงาม อ่านง่าย</p>
+            </div>
+
+            <div style="background: var(--color-accent-light); padding: 40px 30px; border-radius: var(--radius); border: 2px solid var(--color-accent); transform: scale(1.05);">
+                <h3 style="color: var(--color-accent); margin-bottom: 15px;">Online Media</h3>
+                <p style="font-size: 1.5rem; font-weight: 700; margin-bottom: 10px;">เริ่มต้น 800.- <span style="font-size: 0.9rem; font-weight: 400;"></span></p>
+                <p style="color: #666; font-size: 0.9rem;">Banner, Social Media ครบวงจร</p>
+            </div>
+
+            <div style="background: var(--color-gray); padding: 40px 30px; border-radius: var(--radius); transition: 0.3s;">
+                <h3 style="color: var(--color-accent); margin-bottom: 15px;">Print Media</h3>
+                <p style="font-size: 1.5rem; font-weight: 700; margin-bottom: 10px;">เริ่มต้น 500.-</p>
+                <p style="color: #666; font-size: 0.9rem;">นามบัตร, โลโก้, แผ่นพับ</p>
+            </div>
+
+            <div style="background: var(--color-gray); padding: 40px 30px; border-radius: var(--radius); transition: 0.3s;">
+                <h3 style="color: var(--color-accent); margin-bottom: 15px;">Exhibition</h3>
+                <p style="font-size: 1.5rem; font-weight: 700; margin-bottom: 10px;">เริ่มต้น 2,500.-</p>
+                <p style="color: #666; font-size: 0.9rem;">ป้ายร้าน, บูธ, งานโครงสร้าง</p>
+            </div>
+        </div>
+        <p style="margin-top: 40px; color: #888; font-style: italic;">* ราคาเบื้องต้นอาจเปลี่ยนแปลงตามความยากง่ายของเนื้องาน</p>
+    </div>
+</section>
+
+<!-- ===== PORTFOLIO ===== -->
+<section id="portfolio">
+    <h2 class="fade-up">ผลงานที่ผ่านมา</h2>
+    <p class="section-desc fade-up">งานออกแบบที่เราภูมิใจ สร้างสรรค์ให้ลูกค้าหลากหลาย</p>
+
+    <div class="filter-container fade-up">
+        <button class="filter-btn active" data-filter="all">ทั้งหมด</button>
+        <button class="filter-btn" data-filter="report">รายงานประจำปี/รายงานวิชาการ</button>
+        <button class="filter-btn" data-filter="print">สื่อสิ่งพิมพ์</button>
+        <button class="filter-btn" data-filter="online">สื่อออนไลน์</button>
+        <button class="filter-btn" data-filter="exhibition">นิทรรศการ</button>
+    </div>
+
+    <div class="portfolio-grid" id="portfolioGrid">
+
+        <!-- ===== รายงานประจำปี/รายงานวิชาการ ===== -->
+        <div class="portfolio-item fade-up" data-category="report">
+            <div class="portfolio-thumb">
+                <img src="https://lh3.googleusercontent.com/d/1Zd9vO6c4p8GguSgiIkPLM7ZLZytGv0Xc" alt="Annual Report - OJA Culture of Lawfulness" loading="lazy">
+                <div class="portfolio-thumb-overlay"><span>ดูรายละเอียด →</span></div>
+            </div>
+            <div class="portfolio-info">
+                <h3>Annual Report – OJA</h3>
+                <p>รายงานประจำปี สำนักงานกิจการยุติธรรม "Culture of Lawfulness"</p>
+                <span class="portfolio-tag">รายงานประจำปี/รายงานวิชาการ</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item fade-up" data-category="report">
+            <div class="portfolio-thumb">
+                <img src="https://lh3.googleusercontent.com/d/1xNd-l1rRVIGXGNvoP_bbtyeZA-51c2ss" alt="Air Asia One Report 2023" loading="lazy">
+                <div class="portfolio-thumb-overlay"><span>ดูรายละเอียด →</span></div>
+            </div>
+            <div class="portfolio-info">
+                <h3>Air Asia One Report 2023</h3>
+                <p>รายงานประจำปี/ผลงานวิชาการครบวงจร Air Asia – Corporate Governance</p>
+                <span class="portfolio-tag">รายงานประจำปี/รายงานวิชาการ</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item fade-up" data-category="report">
+            <div class="portfolio-thumb">
+                <img src="https://lh3.googleusercontent.com/d/1VUM7izSsSIJ6RbjCipg6ZmeXj_XG9zna" alt="หนังสือสีล" loading="lazy">
+                <div class="portfolio-thumb-overlay"><span>ดูรายละเอียด →</span></div>
+            </div>
+            <div class="portfolio-info">
+                <h3>หนังสือสีล</h3>
+                <p>รายงานประจำปี/ผลงานวิชาการครบวงจร หนังสือสีล</p>
+                <span class="portfolio-tag">รายงานประจำปี/รายงานวิชาการ</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item fade-up" data-category="report">
+            <div class="portfolio-thumb">
+                <img src="https://lh3.googleusercontent.com/d/1zMRysKbu5x3z4YOajAq_I31DasJdHPzh" alt="DXC Data Exchange Center Report" loading="lazy">
+                <div class="portfolio-thumb-overlay"><span>ดูรายละเอียด →</span></div>
+            </div>
+            <div class="portfolio-info">
+                <h3>DXC – Data Exchange Center</h3>
+                <p>ออกแบบรายงานศูนย์แลกเปลี่ยนข้อมูลกระบวนการยุติธรรม</p>
+                <span class="portfolio-tag">รายงานประจำปี</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item fade-up" data-category="report">
+            <div class="portfolio-thumb">
+                <img src="https://lh3.googleusercontent.com/d/1JOnQPnJl1EHwXtv0sM8iLNPzUheasTaR" alt="รายงานความก้าวหน้า โครงการไผ่" loading="lazy">
+                <div class="portfolio-thumb-overlay"><span>ดูรายละเอียด →</span></div>
+            </div>
+            <div class="portfolio-info">
+                <h3>รายงานความก้าวหน้า โครงการไผ่</h3>
+                <p>คณะวนศาสตร์ มหาวิทยาลัยเกษตรศาสตร์</p>
+                <span class="portfolio-tag">รายงานประจำปี/รายงานวิิชาการ</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item fade-up" data-category="report">
+            <div class="portfolio-thumb">
+                <img src="https://lh3.googleusercontent.com/d/1DSpYLaGIf6gwJcqc_J38mqj0ZJZUELmd" alt="ออกแบบปกหนังสือ Social Work Laws  " loading="lazy">
+                <div class="portfolio-thumb-overlay"><span>ดูรายละเอียด →</span></div>
+            </div>
+            <div class="portfolio-info">
+                <h3>ออกแบบปกหนังสือ Social Work Laws</h3>
+                <p>คณะสังคมสงเคราะห์ มหาวิทยาลัยธรรมสาสตร์</p>
+                <span class="portfolio-tag">รายงานประจำปี/รายงานวิิชาการ</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item fade-up" data-category="report">
+            <div class="portfolio-thumb">
+                <img src="https://lh3.googleusercontent.com/d/1kldEcZooZsAH5JviUJYuIqHk5m3qiTwz" alt=" Brochure Safe Point APP" loading="lazy">
+                <div class="portfolio-thumb-overlay"><span>ดูรายละเอียด →</span></div>
+            </div>
+            <div class="portfolio-info">
+                <h3>Brochure Safe Point APP</h3>
+                <p> brochure สำหรับแอป Safe Point</p>
+                <span class="portfolio-tag">สื่อสิ่งพิมพ์</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item fade-up" data-category="report">
+            <div class="portfolio-thumb">
+                <img src="https://lh3.googleusercontent.com/d/1Xe8qciLtLdaoukcCppui4P5wtZrPYbxc" alt=" Brochure 21 Private NOBLE ONE" loading="lazy">
+                <div class="portfolio-thumb-overlay"><span>ดูรายละเอียด →</span></div>
+            </div>
+            <div class="portfolio-info">
+                <h3>Brochure 21 Private NOBLE ONE</h3>
+                <p> brochure สำหรับโครงการ 21 Private NOBLE ONE</p>
+                <span class="portfolio-tag">สื่อสิ่งพิมพ์</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item fade-up" data-category="report">
+            <div class="portfolio-thumb">
+                <img src="https://lh3.googleusercontent.com/d/1NsxtIBcPJ4J5l2Jx6HErOEzLMbXhIlcX" alt=" Brochure NEG smart change" loading="lazy">
+                <div class="portfolio-thumb-overlay"><span>ดูรายละเอียด →</span></div>
+            </div>
+            <div class="portfolio-info">
+                <h3>Brochure สินค้า NEG smart change</h3>
+                <p> brochure สินค้า NEG smart change</p>
+                <span class="portfolio-tag">สื่อสิ่งพิมพ์</span>
+            </div>
+        </div>
+
+        <!-- ===== Infographic / สื่ออินโฟกราฟิก ===== -->
+        <div class="portfolio-item fade-up" data-category="print">
+            <div class="portfolio-thumb">
+                <img src="https://lh3.googleusercontent.com/d/1J2P69kNCHoHpNWoi7VV-jF2EHFBHpzos" alt="Infographic กฎหมาย สูตรจำรถยนต์" loading="lazy">
+                <div class="portfolio-thumb-overlay"><span>ดูรายละเอียด →</span></div>
+            </div>
+            <div class="portfolio-info">
+                <h3>Infographic กฎหมาย – OJA</h3>
+                <p>อินโฟกราฟิกกฎหมายน่ารู้ สำนักงานกิจการยุติธรรม</p>
+                <span class="portfolio-tag">Infographic</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item fade-up" data-category="print">
+            <div class="portfolio-thumb">
+                <img src="https://lh3.googleusercontent.com/d/1nlmMKwS8GAW4ZblsPss5kodaUsqDea7Y" alt="Infographic ลักษณะผู้ป่วยไร้บ้าน" loading="lazy">
+                <div class="portfolio-thumb-overlay"><span>ดูรายละเอียด →</span></div>
+            </div>
+            <div class="portfolio-info">
+                <h3>Infographic – ลักษณะผู้ป่วยไร้บ้าน</h3>
+                <p>สถาบันจิตเวชศาสตร์สมเด็จเจ้าพระยา สถาบันกัลยาราชนครินทร์ โรงพยาบาลศรีธัญญา</p>
+                <span class="portfolio-tag">Infographic</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item fade-up" data-category="print">
+            <div class="portfolio-thumb">
+                <img src="https://lh3.googleusercontent.com/d/1dfg5YJXapbfo0n3zhkJbUTWgYGHgls2K" alt="Infographic กฎหมายที่ดิน" loading="lazy">
+                <div class="portfolio-thumb-overlay"><span>ดูรายละเอียด →</span></div>
+            </div>
+            <div class="portfolio-info">
+                <h3>Infographic กฎหมายที่ดิน</h3>
+                <p>คู่มือ อ่านโฉนดที่ดินอย่างเข้าใจ – OJA</p>
+                <span class="portfolio-tag">Infographic</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item fade-up" data-category="print">
+            <div class="portfolio-thumb">
+                <img src="https://lh3.googleusercontent.com/d/1oaSHQk3kTjeyPgDqeUlfmEDl-1w51rJ6" alt="Infographic ขายตรง vs แชร์ลูกโซ่" loading="lazy">
+                <div class="portfolio-thumb-overlay"><span>ดูรายละเอียด →</span></div>
+            </div>
+            <div class="portfolio-info">
+                <h3>Infographic – ขายตรง vs แชร์ลูกโซ่</h3>
+                <p>รู้ก่อนตัดสินใจ กฎหมายน่ารู้ฉบับประชาชน</p>
+                <span class="portfolio-tag">Infographic</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item fade-up" data-category="print">
+            <div class="portfolio-thumb">
+                <img src="https://lh3.googleusercontent.com/d/1Y203gT6LYLx6zleOgF0u173kZWgKMqEZ" alt="Infographic หลังหย่า เดินหน้าเพื่อลูก" loading="lazy">
+                <div class="portfolio-thumb-overlay"><span>ดูรายละเอียด →</span></div>
+            </div>
+            <div class="portfolio-info">
+                <h3>Infographic – หลังหย่า เดินหน้าเพื่อลูก</h3>
+                <p>กฎหมายสิทธิเลี้ยงดูบุตร อ่านง่าย เข้าใจได้ทันที</p>
+                <span class="portfolio-tag">Infographic</span>
+            </div>
+        </div>
+
+        <!-- ===== นิทรรศการ ===== -->
+        <div class="portfolio-item fade-up" data-category="exhibition">
+            <div class="portfolio-thumb">
+                <img src="https://lh3.googleusercontent.com/d/1y2fwTxxif9fBLI89nGllnVLS8Nkv-t7B" alt="Exhibition Booth" loading="lazy">
+                <div class="portfolio-thumb-overlay"><span>ดูรายละเอียด →</span></div>
+            </div>
+            <div class="portfolio-info">
+                <h3>Exhibition Booth</h3>
+                <p>บูธอีเวนต์</p>
+                <span class="portfolio-tag">นิทรรศการ</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item fade-up" data-category="exhibition">
+            <div class="portfolio-thumb">
+                <img src="https://lh3.googleusercontent.com/d/1UlzXaMLjnBHdwttiqD--ZnilArgJE6VW" alt="Exhibition นิทรรศการกำลังใจ" loading="lazy">
+                <div class="portfolio-thumb-overlay"><span>ดูรายละเอียด →</span></div>
+            </div>
+            <div class="portfolio-info">
+                <h3>นิทรรศการ – กำลังใจ</h3>
+                <p>โครงการกำลังใจ</p>
+                <span class="portfolio-tag">นิทรรศการ</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item fade-up" data-category="exhibition">
+            <div class="portfolio-thumb">
+                <img src="https://lh3.googleusercontent.com/d/1RYwiFugZHTFJSDsnp9pKISiEddaQCnV6" alt="Exhibition Infographic ขยะมูลฝอย" loading="lazy">
+                <div class="portfolio-thumb-overlay"><span>ดูรายละเอียด →</span></div>
+            </div>
+            <div class="portfolio-info">
+                <h3>Exhibition – สถานการณ์ขยะมูลฝอย</h3>
+                <p>Infographic ข้อมูลสิ่งแวดล้อม</p>
+                <span class="portfolio-tag">นิทรรศการ</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item fade-up" data-category="exhibition">
+            <div class="portfolio-thumb">
+                <img src="https://lh3.googleusercontent.com/d/109HAauWnuP2lCe23X5Yd9BAq0FKYVf5v" alt="Exhibition Booth โรงเรียนร่วมพัฒนา" loading="lazy">
+                <div class="portfolio-thumb-overlay"><span>ดูรายละเอียด →</span></div>
+            </div>
+            <div class="portfolio-info">
+                <h3>Exhibition Booth   – โรงเรียนร่วมพัฒนา</h3>
+                <p>นิทรรศการโครงการ "ก่อการครู" ขับเคลื่อนการศึกษา</p>
+                <span class="portfolio-tag">นิทรรศการ</span>
+            </div>
+        </div>
+
+        <!-- ===== สื่อออนไลน์ ===== -->
+        <div class="portfolio-item fade-up" data-category="online">
+            <div class="portfolio-thumb">
+                <img src="https://lh3.googleusercontent.com/d/1mDdic2gqqxRuTjAYIfWAsi554d2GJLPV" alt="Online Media" loading="lazy">
+                <div class="portfolio-thumb-overlay"><span>ดูรายละเอียด →</span></div>
+            </div>
+            <div class="portfolio-info">
+                <h3>Online Media</h3>
+                <p>สื่อออนไลน์</p>
+                <span class="portfolio-tag">สื่อออนไลน์</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item fade-up" data-category="online">
+            <div class="portfolio-thumb">
+                <img src="https://lh3.googleusercontent.com/d/17bxccp2FfHAiM067guPMUuZge7OChdQn" alt="Online Media" loading="lazy">
+                <div class="portfolio-thumb-overlay"><span>ดูรายละเอียด →</span></div>
+            </div>
+            <div class="portfolio-info">
+                <h3>Online Media</h3>
+                <p>สื่อออนไลน์</p>
+                <span class="portfolio-tag">สื่อออนไลน์</span>
+            </div>
+        </div>
+       
+        <div class="portfolio-item fade-up" data-category="online">
+            <div class="portfolio-thumb">
+                <img src="https://lh3.googleusercontent.com/d/1TgFkcRRln8J7JU5xXGXyoCTC-HGz5TnE" alt="Online Media" loading="lazy">
+                <div class="portfolio-thumb-overlay"><span>ดูรายละเอียด →</span></div>
+            </div>
+            <div class="portfolio-info">
+                <h3>Online Media</h3>
+                <p>สื่อออนไลน์</p>
+                <span class="portfolio-tag">สื่อออนไลน์</span>
+            </div>
+        </div>
+       
+
+        
+
+    </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section id="testimonials">
+    <h2 class="fade-up">ลูกค้าพูดถึงเรา</h2>
+    <p class="section-desc fade-up">ความพึงพอใจของลูกค้าคือแรงบันดาลใจที่ดีที่สุดของเรา</p>
+    <div class="testimonial-grid">
+        <div class="testimonial-card fade-up">
+            <p class="testimonial-text">แมวพิมพ์ทำ Annual Report ให้เราได้อย่างสวยงามมาก ทีมงานเข้าใจ Brief ได้รวดเร็ว ปรับแก้ไม่รีรอ ผลลัพธ์ออกมาดีเกินคาด บอร์ดบริหารชื่นชมกันทั้งห้องประชุมเลย</p>
+            <div class="testimonial-author">
+                <div class="author-avatar">👩</div>
+                <div>
+                    <div class="author-name">คุณปวีณา ส.</div>
+                    <div class="author-company">ฝ่าย Corporate Communications</div>
+                    <div class="star-rating">★★★★★</div>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial-card fade-up">
+            <p class="testimonial-text">ติดต่อง่าย ตอบเร็ว ราคาสมเหตุสมผล งานออกมาเกินความคาดหวัง ทีมงานมีไอเดียดีมาก ช่วยให้แบรนด์เราโดดเด่นในงานอีเวนต์ได้จริงๆ จะกลับมาใช้บริการอีกแน่นอน</p>
+            <div class="testimonial-author">
+                <div class="author-avatar">👨</div>
+                <div>
+                    <div class="author-name">คุณธนาวุฒิ ล.</div>
+                    <div class="author-company">Marketing Manager</div>
+                    <div class="star-rating">★★★★★</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact">
+    <h2 class="fade-up">ยินดีที่ได้รู้จัก!</h2>
+    <p class="section-desc fade-up">มาคุยเรื่องงานของคุณกัน ไม่ว่าโปรเจกต์เล็กหรือใหญ่ เราพร้อมเสมอ</p>
+    <div class="contact-container">
+        <div class="contact-info fade-up">
+            <div class="contact-detail-item">
+                <div class="detail-icon">📮</div>
+                <div>
+                    <div class="detail-label">อีเมล</div>
+                    <a href="mailto:hellomaewpim@gmail.com">hellomaewpim@gmail.com</a>
+                </div>
+            </div>
+            <div class="contact-detail-item">
+                <div class="detail-icon">☎️</div>
+                <div>
+                    <div class="detail-label">โทรศัพท์</div>
+                    <a href="tel:0964593696">096-459-3696</a>
+                </div>
+            </div>
+            <div class="contact-detail-item">
+                <div class="detail-icon">📍</div>
+                <div>
+                    <div class="detail-label">ที่ตั้ง</div>
+                    <div class="detail-text">สนามบินน้ำ นนทบุรี, ไทย</div>
+                </div>
+            </div>
+            <div class="contact-detail-item">
+                <div class="detail-icon">⏰</div>
+                <div>
+                    <div class="detail-label">เวลาทำการ</div>
+                    <div class="detail-text">จันทร์–ศุกร์ 9:00–18:00 น.</div>
+                </div>
+            </div>
+
+            <a href="https://line.me/ti/p/@752yysdy" target="_blank" class="line-btn">
+                💬 แอด LINE คุยกับเราคลิกเลย!
+            </a>
+        </div>
+
+        <div class="contact-form fade-up">
+            <form id="maewpimContact">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>ชื่อ-นามสกุล *</label>
+                        <input type="text" placeholder="ระบุชื่อของคุณ" required>
+                    </div>
+                    <div class="form-group">
+                        <label>เบอร์โทรศัพท์</label>
+                        <input type="tel" placeholder="08X-XXX-XXXX">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>อีเมลติดต่อ *</label>
+                    <input type="email" placeholder="example@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label>บริการที่สนใจ *</label>
+                    <select required>
+                        <option value="">เลือกบริการ...</option>
+                        <option value="report">รายงานประจำปี / Annual Report</option>
+                        <option value="print">สื่อสิ่งพิมพ์</option>
+                        <option value="online">สื่อออนไลน์ / Social Media</option>
+                        <option value="exhibition">สื่อนิทรรศการ / บูธ</option>
+                        <option value="other">อื่นๆ</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>กำหนดส่งงาน *</label>
+                    <input type="date" required>
+                </div>
+                <div class="form-group">
+                    <label>งบประมาณโดยประมาณ</label>
+                    <select>
+                        <option value="">เลือกช่วงงบประมาณ...</option>
+                        <option value="5k">ต่ำกว่า 5,000 บาท</option>
+                        <option value="10k">5,000 – 10,000 บาท</option>
+                        <option value="30k">10,000 – 30,000 บาท</option>
+                        <option value="50k">30,000 – 50,000 บาท</option>
+                        <option value="50k+">มากกว่า 50,000 บาท</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>รายละเอียดโปรเจกต์</label>
+                    <textarea rows="4" placeholder="บอกเราคร่าวๆ เกี่ยวกับงานที่คุณต้องการ เช่น ขนาด จำนวน ระยะเวลา..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-submit">ส่งข้อความถึงแมวพิมพ์ 🐾</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <img src="logoweb.png" alt="แมวพิมพ์" style="width: 120px; margin-bottom: 1rem;">
+            <p>สตูดิโอออกแบบสร้างสรรค์ครบวงจร ที่เชื่อว่าทุกแบรนด์มีเรื่องราวที่น่าบอกเล่า และเราพร้อมช่วยให้คุณบอกมันได้อย่างสวยงาม</p>
+        </div>
+        <div class="footer-col">
+            <h4>บริการของเรา</h4>
+            <ul>
+                <li><a href="#services">รายงานประจำปี/รายงานวิชาการ</a></li>
+                <li><a href="#services">สื่อสิ่งพิมพ์</a></li>
+                <li><a href="#services">สื่อออนไลน์</a></li>
+                <li><a href="#services">สื่อนิทรรศการ</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>ติดต่อเรา</h4>
+            <ul>
+                <li><a href="mailto:hellomaewpim@gmail.com">📮 อีเมล</a></li>
+                <li><a href="tel:0964593696">☎️ 096-459-3696, 082-404-3971</a></li>
+                <li><a href="https://metita1213ce.myportfolio.com/metita-portfolio?fbclid=IwY2xjawQxAoNleHRuA2FlbQIxMABicmlkETFweWJEUUEwWlg4ZnFpV05Zc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHgacBfzx4eIfJhLelyFocC4AqIUpJRUpt-vGHVDipzS9xySEFlR19DvEtMev_aem_EU2xg_CR43U5SsEnT-wHDA" target="_blank">🗂️ ดูผลงาน</a></li>
+                <li><a href="https://line.me/ti/p/@752yysdy">💬 ส่งข้อความ</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+    <div style="display: flex; justify-content: flex-end; gap: 20px; padding-bottom: 15px;">
+        <a href="https://www.facebook.com/MaewPim" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/maewpim.studio/" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+        <a href="https://line.me/ti/p/@752yysdy" target="_blank" class="social-link"><i class="fab fa-line"></i></a>
+    </div>
+        <p>© 2026 แมวพิมพ์ (MaewPim) | Creative Design Studio · สนามบินน้ำ นนทบุรี</p>
+    
+</footer>
+
+<!-- Scroll to Top -->
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="กลับด้านบน">↑</button>
+
+<!-- Success Modal -->
+<div class="modal-overlay" id="successModal">
+    <div class="modal-box">
+        <div class="modal-icon">🐾</div>
+        <h3>ส่งข้อความสำเร็จ!</h3>
+        <p>ขอบคุณที่ติดต่อแมวพิมพ์นะคะ ทีมงานจะรีบติดต่อกลับภายใน 24 ชั่วโมงค่ะ 😊</p>
+        <button class="modal-close" onclick="closeModal()">ปิด</button>
+    </div>
+</div>
+
+<script>
+    // ===== HAMBURGER MENU =====
+    function toggleMenu() {
+        const h = document.getElementById('hamburger');
+        const m = document.getElementById('mobileMenu');
+        h.classList.toggle('open');
+        m.classList.toggle('show');
+    }
+    function closeMenu() {
+        document.getElementById('hamburger').classList.remove('open');
+        document.getElementById('mobileMenu').classList.remove('show');
+    }
+
+// ===== PORTFOLIO FILTER =====
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.dataset.filter;
+            document.querySelectorAll('.portfolio-item').forEach(item => {
+                if (filter === 'all' || item.dataset.category === filter) {
+                    item.classList.remove('hide');
+                } else {
+                    item.classList.add('hide');
+                }
+            });
+        });
+    });
+
+    // ===== SCROLL ANIMATIONS =====
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // ===== SCROLL TO TOP =====
+    const scrollBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+        scrollBtn.classList.toggle('show', window.scrollY > 400);
+    });
+
+    // ===== FORM SUBMIT =====
+    document.getElementById('maewpimContact').addEventListener('submit', (e) => {
+        e.preventDefault();
+        document.getElementById('successModal').classList.add('show');
+        e.target.reset();
+    });
+
+    function closeModal() {
+        document.getElementById('successModal').classList.remove('show');
+    }
+    document.getElementById('successModal').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) closeModal();
+    });
+
+    // ===== ACTIVE NAV ON SCROLL =====
+    const sections = document.querySelectorAll('section[id], #hero-section');
+    const navLinks = document.querySelectorAll('nav a[href^="#"]');
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(s => {
+            if (window.scrollY >= s.offsetTop - 120) current = s.id;
+        });
+        navLinks.forEach(a => {
+            a.style.background = a.getAttribute('href') === '#' + current
+                ? 'rgba(255,255,255,0.2)' : '';
+        });
+    });
+    // เรียกใช้ fade-up observer
+    window.onload = () => {
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    };
+</script>
+</body>
+</html>
