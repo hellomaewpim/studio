@@ -77,9 +77,15 @@
         }
 
         .logo-icon img {
-            width: 150px; /* ขนาดโลโก้ตามต้องการ */
+            width: 150px;
             height: auto;
             display: block;
+        }
+
+        @media (max-width: 968px) {
+            .logo-icon img { width: 100px; }
+            header { height: 64px; }
+            .mobile-menu { top: 64px; }
         }
 
         /* ===== HERO RE-STRUCTURE ===== */
@@ -160,8 +166,6 @@
         .mobile-menu a { color: white; text-decoration: none; padding: 12px 20px; border-radius: 12px; font-size: 1rem; transition: 0.2s; }
         .mobile-menu a:hover { background: rgba(255,255,255,0.15); }
 
-        /* ===== HERO ===== */
-        /* แก้ไขส่วน Hero ใหม่ */
         .hero {
             padding: 160px 0 100px;
             overflow: hidden;
@@ -776,26 +780,33 @@
         }
 
         @media (max-width: 600px) {
-            h1 { font-size: 1.5rem !important; line-height: 1.4 !important; }
-            h2 { font-size: 1.3rem !important; text-align: left !important; }
+            h1 { font-size: 1.35rem !important; line-height: 1.4 !important; }
+            h2 { font-size: 1.2rem !important; text-align: left !important; }
             h3 { font-size: 1rem !important; }
             .section-desc { text-align: left; margin-left: 0; margin-right: 0; }
-            .hero { padding: 100px 0 50px; }
-            .hero-grid { gap: 20px; }
-            .hero-content p { font-size: 0.9rem; }
+            .hero { padding: 90px 0 40px; }
+            .hero-grid { gap: 12px; align-items: flex-start; }
+            .hero-content p { font-size: 0.88rem; margin-bottom: 1.2rem; }
             .contact-form { padding: 1.5rem; }
             .footer-bottom { flex-direction: column; text-align: left; }
             .social-links { justify-content: flex-start; }
             .hero-stats { flex-direction: row; gap: 1.5rem; flex-wrap: wrap; }
             .stat-num { font-size: 1.5rem; }
 
-            .hero-btns { display: flex; flex-direction: column; gap: 12px; width: 100%; }
+            .hero-btns {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+                margin-top: 1.5rem;
+            }
             .hero-btns .btn {
                 width: 100%;
                 justify-content: center;
-                padding: 14px 20px;
-                border-radius: 12px;
-                font-size: 1rem;
+                padding: 12px 20px;
+                border-radius: 10px;
+                font-size: 0.95rem;
+                font-weight: 600;
             }
         }
     </style>
@@ -837,8 +848,8 @@
 <section class="hero" id="hero-section">
     <div class="container hero-grid">
         <div class="hero-content fade-up">
-            <h1>สร้างสรรค์งานดีไซน์<br>ที่ช่วยให้ผลงานของคุณ "โดดเด่น"</h1>
-            <p>รับออกแบบสื่อสิ่งพิมพ์ Brochure และ Online Content ครบวงจร โดย Graphic Designer ที่ใส่ใจคุณ</p>
+            <h1>สร้างสรรค์งานดีไซน์<br>ที่ช่วยให้ผลงานของคุณ<br>"โดดเด่น"</h1>
+            <p>รับออกแบบสื่อสิ่งพิมพ์ Brochure และ Online Content ครบวงจร<br>โดย Graphic Designer ที่ใส่ใจคุณ</p>
             <div class="hero-btns">
                 <a href="#portfolio" class="btn">ดูผลงานของเรา</a>
                 <a href="#services" class="btn btn-outline">บริการทั้งหมด</a>
@@ -855,7 +866,7 @@
 <!-- ===== SERVICES ===== -->
 <section id="services">
     <h2 class="fade-up">บริการของเรา</h2>
-    <p class="section-desc fade-up">แมวพิมพ์ ให้บริการออกแบบครบวงจร ตั้งแต่งานออนไลน์ไปจนถึงงานผลิตกราฟิกนิทรรศการ เพื่อตอบโจทย์ทุกความต้องการของคุณ</p>
+    <p class="section-desc fade-up">แมวพิมพ์ ให้บริการออกแบบครบวงจร ตั้งแต่งานออนไลน์ไปจนถึงงานผลิตกราฟิกนิทรรศการ<br>เพื่อตอบโจทย์ทุกความต้องการของคุณ</p>
     <div class="services-grid">
         <div class="service-card fade-up">
             <div class="service-icon">📄</div>
