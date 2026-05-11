@@ -226,6 +226,10 @@
             margin-bottom: 20px;
         }
 
+        .hero-desc {
+            margin-bottom: 2rem;
+        }
+
         .hero-mascot {
             display: flex;
             justify-content: center;
@@ -786,7 +790,10 @@
             .section-desc { text-align: left; margin-left: 0; margin-right: 0; }
             .hero { padding: 90px 0 40px; }
             .hero-grid { gap: 12px; align-items: flex-start; }
-            .hero-content p { font-size: 0.88rem; margin-bottom: 1.2rem; }
+            .hero-content h1 { font-size: 1.35rem !important; line-height: 1.4 !important; }
+            .hero-content h1::after { content: none; }
+            .hero-desc { font-size: 0.88rem; margin-bottom: 1.5rem; }
+            .hero-desc br { display: block; }
             .contact-form { padding: 1.5rem; }
             .footer-bottom { flex-direction: column; text-align: left; }
             .social-links { justify-content: flex-start; }
@@ -848,8 +855,8 @@
 <section class="hero" id="hero-section">
     <div class="container hero-grid">
         <div class="hero-content fade-up">
-            <h1>สร้างสรรค์งานดีไซน์<br>ที่ช่วยให้ผลงานของคุณ<br>"โดดเด่น"</h1>
-            <p>รับออกแบบสื่อสิ่งพิมพ์ Brochure และ Online Content ครบวงจร<br>โดย Graphic Designer ที่ใส่ใจคุณ</p>
+            <h1>สร้างสรรค์งานดีไซน์ ที่ช่วยให้ผลงานของคุณ "โดดเด่น"</h1>
+            <p class="hero-desc">รับออกแบบสื่อสิ่งพิมพ์ Brochure และ Online Content ครบวงจร โดย Graphic Designer ที่ใส่ใจคุณ</p>
             <div class="hero-btns">
                 <a href="#portfolio" class="btn">ดูผลงานของเรา</a>
                 <a href="#services" class="btn btn-outline">บริการทั้งหมด</a>
