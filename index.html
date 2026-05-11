@@ -36,9 +36,9 @@
         }
 
         h1, h2, h3 { color: var(--color-accent); }
-        h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.2; margin-bottom: 1.2rem; }
-        h2 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); text-align: center; margin-bottom: 1rem; letter-spacing: 0.1rem; }
-        h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+        h1 { font-size: clamp(1.6rem, 4vw, 3.5rem); font-weight: 700; line-height: 1.3; margin-bottom: 1.2rem; }
+        h2 { font-size: clamp(1.4rem, 3vw, 2.4rem); text-align: center; margin-bottom: 1rem; letter-spacing: 0.05rem; }
+        h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
         .section-desc { text-align: center; margin-bottom: 3.5rem; color: #666; font-size: 1.05rem; max-width: 500px; margin-left: auto; margin-right: auto; }
        .social-link {
     color: white !important;
@@ -201,14 +201,14 @@
 
         .hero-grid {
             display: grid;
-            grid-template-columns: 1.4fr 0.6fr; /* แบ่งสัดส่วนข้อความกับรูป */
+            grid-template-columns: 1.4fr 0.6fr;
             align-items: center;
             gap: 60px;
         }
 
         .hero-content h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            line-height: 1.2;
+            font-size: clamp(1.6rem, 4vw, 3.5rem);
+            line-height: 1.3;
             color: var(--color-accent);
             margin-bottom: 20px;
         }
@@ -229,7 +229,7 @@
         @media (max-width: 968px) {
             .hero-grid {
                 grid-template-columns: 1fr;
-                text-align: center;
+                text-align: left;
             }
             .hero-mascot { margin-top: 40px; }
             .container { padding: 0 20px; }
@@ -737,9 +737,9 @@
                 padding-top: 4rem;
                 min-height: auto;
             }
-            .hero-text p { margin-left: auto; margin-right: auto; }
-            .hero-buttons { justify-content: center; }
-            .hero-stats { justify-content: center; }
+            .hero-text p { margin-left: 0; margin-right: 0; }
+            .hero-buttons { justify-content: flex-start; }
+            .hero-stats { justify-content: flex-start; }
             .hero-image-wrap { order: -1; }
             .hero-mascot { width: 240px; height: 240px; font-size: 6rem; }
 
@@ -747,10 +747,10 @@
             .hamburger { display: flex; }
 
             .contact-container { grid-template-columns: 1fr; }
-            .contact-info h2 { text-align: center; }
+            .contact-info h2 { text-align: left; }
 
             .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
-            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-bottom { flex-direction: column; text-align: left; }
 
             .process-steps::before { display: none; }
 
@@ -758,10 +758,33 @@
         }
 
         @media (max-width: 968px) {
-            .hero-mascot { 
-                width: 200px; /* ปรับขนาดสำหรับมือถือ */
-                height: 200px; 
-        
+            .hero-mascot img { 
+                width: 200px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.5rem !important; line-height: 1.4 !important; }
+            h2 { font-size: 1.3rem !important; text-align: left !important; }
+            h3 { font-size: 1rem !important; }
+            .section-desc { text-align: left; margin-left: 0; margin-right: 0; }
+            .hero { padding: 100px 0 50px; }
+            .hero-grid { gap: 20px; }
+            .hero-content p { font-size: 0.9rem; }
+            .contact-form { padding: 1.5rem; }
+            .footer-bottom { flex-direction: column; text-align: left; }
+            .social-links { justify-content: flex-start; }
+            .hero-stats { flex-direction: row; gap: 1.5rem; flex-wrap: wrap; }
+            .stat-num { font-size: 1.5rem; }
+
+            .hero-btns { display: flex; flex-direction: column; gap: 12px; width: 100%; }
+            .hero-btns .btn {
+                width: 100%;
+                justify-content: center;
+                padding: 14px 20px;
+                border-radius: 12px;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -800,7 +823,7 @@
 
 <!-- ===== HERO ===== -->
 <section class="hero" id="hero-section">
-    <div class="container" style="display: grid; grid-template-columns: 2fr 1fr; align-items: center; gap: 60px;">
+    <div class="container hero-grid">
         <div class="hero-content fade-up">
             <h1>สร้างสรรค์งานดีไซน์<br>ที่ช่วยให้ผลงานของคุณ "โดดเด่น"</h1>
             <p>รับออกแบบสื่อสิ่งพิมพ์ Brochure และ Online Content ครบวงจร โดย Graphic Designer ที่ใส่ใจคุณ</p>
