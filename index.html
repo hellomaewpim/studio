@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>แมวพิมพ์ | รับออกแบบสื่อครบวงจร</title>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;600;700&family=Prompt:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -28,7 +28,7 @@
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'IBM Plex Sans Thai', sans-serif;
+            font-family: 'IBM Plex Sans Thai', 'Prompt', sans-serif;
             color: var(--color-text);
             background-color: var(--color-primary);
             line-height: 1.7;
@@ -798,7 +798,7 @@
             h1 { font-size: 1.35rem !important; line-height: 1.4 !important; }
             h2 { font-size: 1.2rem !important; text-align: left !important; }
             h3 { font-size: 1rem !important; }
-            .section-desc { text-align: left; margin-left: 0; margin-right: 0; }
+            .section-desc { text-align: left; margin-left: 0; margin-right: 0; font-size: 0.92rem; }
             .hero { padding: 95px 0 40px; }
             .hero-grid { gap: 12px; align-items: flex-start; }
             .hero-content h1 { font-size: 1.35rem !important; line-height: 1.4 !important; }
@@ -810,6 +810,26 @@
             .social-links { justify-content: flex-start; }
             .hero-stats { flex-direction: row; gap: 1.5rem; flex-wrap: wrap; }
             .stat-num { font-size: 1.5rem; }
+
+            /* Sections padding mobile */
+            #services, #process, #portfolio, #pricing, #testimonials, #contact { padding: 3.5rem 4% !important; }
+            #sticker { padding: 3.5rem 4% 3rem !important; }
+
+            /* Services grid 1 col on small mobile */
+            .services-grid { grid-template-columns: 1fr !important; gap: 1.2rem; }
+            .service-card { padding: 1.8rem 1.5rem; }
+
+            /* Process grid 2x2 on mobile */
+            .process-steps { grid-template-columns: repeat(2, 1fr) !important; gap: 1.5rem; }
+            .process-steps::before { display: none; }
+            .step-num { width: 60px; height: 60px; font-size: 1.3rem; }
+
+            /* Sticker section */
+            #sticker h2 { text-align: left !important; }
+
+            /* Pricing */
+            #pricing { padding: 3.5rem 4% !important; }
+            #pricing h2 { font-size: 1.2rem !important; text-align: left !important; margin-bottom: 1.5rem !important; }
 
             .hero-btns {
                 display: flex;
